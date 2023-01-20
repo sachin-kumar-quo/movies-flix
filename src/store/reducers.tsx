@@ -1,10 +1,11 @@
+import { IAction } from '../interfaces';
 import * as actions from './actionTypes';
 
 export const reducerInitialState = {
   laoding:false,
   isSignedIn: false,
   user: {},
-  shows: [],
+  shows: {},
   show: {},
   searchResult: []
 }

@@ -1,29 +1,36 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { getShowsList } from '../../store/actions';
-import { GET_ALL_SHOWS } from '../../store/actionTypes';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
 const ShowList = () => {
-  const [showsList, setShowsList] = useState([]);
   const dispatch = useAppDispatch();
-  const movies = useAppSelector((state) => {
-    console.log(state);
-    return state.reducer.shows
-  });
+  const movies = useAppSelector((state) => state.reducer.shows);
+
   useEffect(() => {
     if (!movies.length) {
       dispatch(getShowsList());
     }
   }, [])
-  
-  const setdata = () => {
-    setShowsList(movies);
-  }
+
   return (
-    <div>{JSON.stringify(movies)}
-      <Link to="detail"> next</Link>
+    <div>
+      {
+        Object.keys(movies).map(genre => {
+          return (
+            <div key={genre}>
+              <h3>{genre}</h3>
+              {movies[genre].map((movie:any) => {
+                return (
+                  <div key={movie.id}>
+                    <h4>{movie.name}</h4>
+                  </div>
+                )
+              })}
+            </div>
+          )
+        })
+      }
     </div>
   )
 }

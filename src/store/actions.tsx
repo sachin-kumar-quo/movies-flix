@@ -1,6 +1,7 @@
 import { Dispatch } from "react";
 import { fetchAllShows, fetchSearchResults, fetchShowDetails } from "../apis"
 import { IGetAllShows, IGetShowsDetails, ILoading, ISearchResult, IShows, IShowsDetail, IUser } from "../interfaces";
+import { organizeShows } from "../utils";
 import * as actions from "./actionTypes";
 
 export const GET_SHOWS_LIST = (movies: IShows) => ({
@@ -41,8 +42,8 @@ export const getShowsList = () => {
   return async (dispatch : Dispatch<ILoading | IGetAllShows>) => {
     dispatch(LOADING(true));
     const shows = await fetchAllShows();
-    console.log(shows);
-    dispatch(GET_SHOWS_LIST(shows));
+    const organizedShows = organizeShows(shows);
+    dispatch(GET_SHOWS_LIST(organizedShows));
     dispatch(LOADING(false));
   }
 }
