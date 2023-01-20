@@ -41,6 +41,7 @@ export const getShowsList = () => {
   return async (dispatch : Dispatch<ILoading | IGetAllShows>) => {
     dispatch(LOADING(true));
     const shows = await fetchAllShows();
+    console.log(shows);
     dispatch(GET_SHOWS_LIST(shows));
     dispatch(LOADING(false));
   }

@@ -10,7 +10,7 @@ export const reducerInitialState = {
 }
 
 const reducer = (state = reducerInitialState, action) => {
-  switch (action) {
+  switch (action.type) {
     case actions.LOADING:
       return { ...state, loading: action.payload };
     case actions.SIGNIN:

@@ -1,0 +1,35 @@
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  height: 6rem;
+  background-color: #bbd3fa;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.logo {
+  font-size: 26px;
+}
+
+.search-box {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 20px;
+  padding-right: 30px;
+}
+
+input {
+  display: flex;
+  align-self: flex-end;
+  height: 1.6rem;
+  width: 15rem;
+  border-radius: 8px;
+  border-width: 1px;
+}
+
+.search-box img {
+  align-self: flex-end;
+  padding-bottom: 4px;
+  padding-right: 5px;
+}
