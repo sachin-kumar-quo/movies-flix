@@ -1,17 +1,28 @@
-import { useAppSelector } from '../../store/hooks';
-import Card from '../Card';
+import { useAppSelector } from "../../store/hooks";
+import Card from "../Card";
+import Loading from "../Loading";
 import "./index.css";
 
 const SearchResults = () => {
-  const { searchResult } = useAppSelector(state => state.reducer);
+  const { searchResult, laoding } = useAppSelector(
+    (state) => state.reducer
+  );
 
   return (
-    <div className='search-result'>
-      {searchResult.length && searchResult.map((result: any) => {
-        return <Card key={result.show.id} show={result.show} />
-      })}
+    <div className="search-result">
+      {laoding ? (
+        <Loading />
+      ) : searchResult.length ? (
+        searchResult.map((result: any) => {
+          return <Card key={result.show.id} show={result.show} />;
+        })
+      ) : (
+        <div>
+          <h1>No Result Found</h1>
+        </div>
+      )}
     </div>
-  )
-}
+  );
+};
 
 export default SearchResults;

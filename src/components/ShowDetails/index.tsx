@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom';
 import StarRatings from 'react-star-ratings';
 import { fetchShowCasts, fetchShowCrew, fetchShowDetails } from '../../apis';
 import { IShowsDetail } from '../../interfaces';
-import Header from '../Header';
+import Loading from '../Loading';
 
 import "./index.css";
 
@@ -63,7 +63,7 @@ const ShowDetails = () => {
           </div>
         </div>
       ) : (
-        <div>Loading</div>
+        <Loading />
       )}
     </>
   );

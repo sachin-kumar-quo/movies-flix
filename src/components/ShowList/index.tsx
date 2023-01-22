@@ -27,13 +27,13 @@ const ShowList = () => {
   }
 
   return (
-    <div>
+    <div className='list-container'>
       {!laoding ?
         genres.map((genre) => {
           let shows = getGenreShows(genre);
           return shows && shows.length ? (
             <div key={genre}>
-              <h3>{genre}</h3>
+              <h3 className='genre-head'>{genre}</h3>
               <div className="card-list">
                 {shows.map((show: any) => {
                   return <Card key={show.id} show={show} />;
