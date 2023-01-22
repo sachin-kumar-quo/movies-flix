@@ -13,11 +13,16 @@ const Header = (props: IHeaderProps) => {
   return (
     <nav className="navigation">
       <div className="logo">
-        <Link to={'/'}><h1>ShowFlix</h1></Link>
+        <Link to={"/"} style={{ textDecoration: "none" }}>
+          <h1>ShowFlix</h1>
+        </Link>
       </div>
-      <div className='search-box'>
+      <div className="search-box">
         <img src={searchIcon} height="24px" />
-        <input type="text" onChange={(e)=>props.setSearchText(e.target.value)}/>
+        <input
+          type="text"
+          onChange={(e) => props.setSearchText(e.target.value)}
+        />
       </div>
     </nav>
   );
