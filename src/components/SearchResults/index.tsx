@@ -4,13 +4,13 @@ import Loading from "../Loading";
 import "./index.css";
 
 const SearchResults = () => {
-  const { searchResult, laoding } = useAppSelector(
+  const { searchResult, loading } = useAppSelector(
     (state) => state.reducer
   );
 
   return (
     <div className="search-result">
-      {laoding ? (
+      {loading ? (
         <Loading />
       ) : searchResult.length ? (
         searchResult.map((result: any) => {

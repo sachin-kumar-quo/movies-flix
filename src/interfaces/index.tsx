@@ -129,3 +129,13 @@ export type IAction =
   | ISignup
   | ISignout
   | ISearchResult;
+
+export interface IInitialState {
+  loading: boolean;
+  isSignedIn: boolean;
+  user: any;
+  shows: any;
+  searchResult: any[];
+  showSearch: boolean;
+  bookmarks: any[];
+}

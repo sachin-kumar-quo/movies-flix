@@ -1,16 +1,17 @@
+import { IInitialState } from '../interfaces';
 import * as actions from './actionTypes';
 
-export const reducerInitialState = {
-  laoding: false,
+export const reducerInitialState:IInitialState = {
+  loading: false,
   isSignedIn: false,
   user: {},
   shows: {},
-  bookmarks: [],
   searchResult: [],
-  showSearch:false
+  showSearch: false,
+  bookmarks: []
 };
 
-const reducer = (state = reducerInitialState, action) => {
+const reducer = (state = reducerInitialState, action:any) => {
   switch (action.type) {
     case actions.LOADING:
       return { ...state, loading: action.payload };
@@ -34,7 +35,7 @@ const reducer = (state = reducerInitialState, action) => {
     case actions.REMOVE_BOOKMARK:
       return {
         ...state,
-        bookmarks: state.bookmarks.filter(id=>id!=action.payload)
+        bookmarks: [...state.bookmarks.filter(id=>id!=action.payload)]
       };
     case actions.SHOW_SEARCH:
       return { ...state, showSearch: action.payload };

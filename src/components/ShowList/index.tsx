@@ -10,7 +10,7 @@ import './index.css';
 
 const ShowList = () => {
   const dispatch = useAppDispatch();
-  const {shows : movies, laoding} = useAppSelector((state) => state.reducer);
+  const {shows : movies, loading} = useAppSelector((state) => state.reducer);
 
   useEffect(() => {
     if (!movies.length) {
@@ -28,7 +28,7 @@ const ShowList = () => {
 
   return (
     <div className='list-container'>
-      {!laoding ?
+      {!loading ?
         genres.map((genre) => {
           let shows = getGenreShows(genre);
           return shows && shows.length ? (
