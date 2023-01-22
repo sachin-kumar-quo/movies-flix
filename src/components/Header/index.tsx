@@ -1,16 +1,23 @@
 import React from 'react';
 import './index.css';
 import searchIcon from '../../assets/magnifier.png';
+import { Link } from 'react-router-dom';
 
-const Header = () => {
+interface IHeaderProps {
+  searchText: string;
+  setSearchText: (arg0: string) => void;
+}
+
+const Header = (props: IHeaderProps) => {
+  
   return (
     <nav className="navigation">
       <div className="logo">
-        <h1>ShowFlix</h1>
+        <Link to={'/'}><h1>ShowFlix</h1></Link>
       </div>
       <div className='search-box'>
         <img src={searchIcon} height="24px" />
-        <input type="text" />
+        <input type="text" onChange={(e)=>props.setSearchText(e.target.value)}/>
       </div>
     </nav>
   );

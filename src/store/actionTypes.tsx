@@ -6,3 +6,6 @@ export const SIGNOUT = 'signout';
 export const SEARCH = 'search';
 export const SIGNUP = 'signup';
 export const GET_SEARCH_RESULT = "getSearchResult";
+export const ADD_BOOKMARK = "addBookmark";
+export const REMOVE_BOOKMARK = "removeBookamrk";
+export const SHOW_SEARCH = "showSearch";

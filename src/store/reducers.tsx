@@ -1,14 +1,14 @@
-import { IAction } from '../interfaces';
 import * as actions from './actionTypes';
 
 export const reducerInitialState = {
-  laoding:false,
+  laoding: false,
   isSignedIn: false,
   user: {},
   shows: {},
-  show: {},
-  searchResult: []
-}
+  bookmarks: [],
+  searchResult: [],
+  showSearch:false
+};
 
 const reducer = (state = reducerInitialState, action) => {
   switch (action.type) {
@@ -26,6 +26,18 @@ const reducer = (state = reducerInitialState, action) => {
       return { ...state, show: action.payload };
     case actions.GET_SEARCH_RESULT:
       return { ...state, searchResult: action.payload };
+    case actions.ADD_BOOKMARK:
+      return {
+        ...state,
+        bookmarks: [...state.bookmarks, action.payload]
+      };
+    case actions.REMOVE_BOOKMARK:
+      return {
+        ...state,
+        bookmarks: state.bookmarks.filter(id=>id!=action.payload)
+      };
+    case actions.SHOW_SEARCH:
+      return { ...state, showSearch: action.payload };
     default:
       return state;
   }

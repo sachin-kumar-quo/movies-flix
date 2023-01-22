@@ -1,7 +1,6 @@
 import { Dispatch } from "react";
 import { fetchAllShows, fetchSearchResults, fetchShowDetails } from "../apis"
 import { IGetAllShows, IGetShowsDetails, ILoading, ISearchResult, IShows, IShowsDetail, IUser } from "../interfaces";
-import { organizeShows } from "../utils";
 import * as actions from "./actionTypes";
 
 export const GET_SHOWS_LIST = (movies: IShows) => ({
@@ -38,30 +37,40 @@ export const SIGNUP = (user:IUser) => ({
   type : actions.SIGNUP
 })
 
+export const ADD_BOOKMARK = (id: number) => ({
+  payload: id,
+  type: actions.ADD_BOOKMARK
+})
+
+export const REMOVE_BOOKMARK = (id: number) => ({
+  payload: id,
+  type: actions.REMOVE_BOOKMARK
+})
+
+export const SHOW_SEARCH = (show: boolean) => ({
+  type: actions.SHOW_SEARCH,
+  payload:show
+})
+
 export const getShowsList = () => {
   return async (dispatch : Dispatch<ILoading | IGetAllShows>) => {
     dispatch(LOADING(true));
     const shows = await fetchAllShows();
-    const organizedShows = organizeShows(shows);
-    dispatch(GET_SHOWS_LIST(organizedShows));
+    dispatch(GET_SHOWS_LIST(shows));
     dispatch(LOADING(false));
   }
 }
 
-export const getShowsDetails = () => {
-  return async (dispatch: Dispatch<ILoading | IGetShowsDetails>) => {
-    dispatch(LOADING(true));
-    const shows = await fetchShowDetails();
-    dispatch(GET_SHOW_DETAILS(shows));
-    dispatch(LOADING(false));
-  };
-};
-
-export const getSearchResults = () => {
+export const getSearchResults = (query:string) => {
   return async (dispatch: Dispatch<ILoading | ISearchResult>) => {
     dispatch(LOADING(true));
-    const shows = await fetchSearchResults();
-    dispatch(GET_SEARCH_RESULT(shows));
+    if (query) {
+      const shows = await fetchSearchResults(query);
+      dispatch(GET_SEARCH_RESULT(shows));
+      dispatch(SHOW_SEARCH(true));
+    } else {
+      dispatch(SHOW_SEARCH(false));
+    }
     dispatch(LOADING(false));
   };
 };

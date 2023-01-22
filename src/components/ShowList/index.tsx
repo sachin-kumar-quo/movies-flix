@@ -1,11 +1,16 @@
-import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { useEffect } from 'react'
+import { IShowsDetail } from '../../interfaces';
 import { getShowsList } from '../../store/actions';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { genres } from '../../utils';
+import Card from '../Card';
+import Loading from '../Loading';
+
+import './index.css';
 
 const ShowList = () => {
   const dispatch = useAppDispatch();
-  const movies = useAppSelector((state) => state.reducer.shows);
+  const {shows : movies, laoding} = useAppSelector((state) => state.reducer);
 
   useEffect(() => {
     if (!movies.length) {
@@ -13,26 +18,34 @@ const ShowList = () => {
     }
   }, [])
 
+  const getGenreShows = (genre: string) => {
+    return movies.length ? movies.filter((show: IShowsDetail) => {
+      if (show.genres.includes(genre)) {
+        return show;
+      }
+    }) : null;
+  }
+
   return (
     <div>
-      {
-        Object.keys(movies).map(genre => {
-          return (
+      {!laoding ?
+        genres.map((genre) => {
+          let shows = getGenreShows(genre);
+          return shows && shows.length ? (
             <div key={genre}>
               <h3>{genre}</h3>
-              {movies[genre].map((movie:any) => {
-                return (
-                  <div key={movie.id}>
-                    <h4>{movie.name}</h4>
-                  </div>
-                )
-              })}
+              <div className="card-list">
+                {shows.map((show: any) => {
+                  return <Card key={show.id} show={show} />;
+                })}
+              </div>
             </div>
-          )
-        })
-      }
+          ) : null;
+        }) :
+        <Loading />
+        }
     </div>
-  )
+  );
 }
 
 export default ShowList;

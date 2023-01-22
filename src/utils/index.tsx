@@ -1,14 +1,31 @@
-import { IShowsDetail } from "../interfaces";
 
-export const organizeShows = (shows:IShowsDetail[]) => {
-  let result:any = {};
-  shows.forEach((show : IShowsDetail) => {
-    if (result[show.type]) {
-      result[show.type] = [...result[show.type], show];
-    } else {
-      result[show.type] = [show];
-    }
-  });
-  console.log(result);
-  return result;
-}
+export const genres = [
+  "Action",
+  "Adult",
+  "Adventure",
+  "Anime",
+  "Children",
+  "Comedy",
+  "Crime",
+  "DIY",
+  "Drama",
+  "Espionage",
+  "Family",
+  "Fantasy",
+  "Food",
+  "History",
+  "Horror",
+  "Legal",
+  "Medical",
+  "Music",
+  "Mystery",
+  "Nature",
+  "Romance",
+  "Science-Fiction",
+  "Sports",
+  "Supernatural",
+  "Thriller",
+  "Travel",
+  "War",
+  "Western"
+];
